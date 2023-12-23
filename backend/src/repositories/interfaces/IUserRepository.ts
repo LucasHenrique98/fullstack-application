@@ -1,3 +1,5 @@
+import { Document } from "mongoose";
+
 export type User = {
   id: string;
   name: string;
@@ -6,6 +8,6 @@ export type User = {
 
 
 export interface IUserRepository {
-  findById(id: string): Promise<User>
-  createUser(user: Omit<User, 'id'>): Promise<User>
+  findById(id: string): Promise<User | null>
+  createUser(user: Omit<User, 'id'>): Promise<Document<User>>
 }

@@ -18,7 +18,7 @@ export class Database {
       Database.database = await mongoose.connect(process.env.MONGO_URI as string);
 
       if (this.isConnected()) {
-        console.log('Connected to MONGO DB')
+        console.log('Connected to MONGO DB');
       }
 
       Database.database.connection.on('error', () => {
