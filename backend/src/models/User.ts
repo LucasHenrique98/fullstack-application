@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
-type UserType = {
+export type UserType = {
   name: string;
   email: string;
 };

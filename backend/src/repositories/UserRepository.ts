@@ -2,7 +2,7 @@ import { Document } from "mongoose";
 import { User as UserSchema } from "../models/User";
 import { IUserRepository, User } from "./interfaces/IUserRepository";
 
-export class UserRepository implements IUserRepository {
+class UserRepository implements IUserRepository {
   findById(id: string): Promise<User | null> {
     return UserSchema.findById(id);
   }
@@ -14,3 +14,5 @@ export class UserRepository implements IUserRepository {
     })
   }
 }
+
+export default new UserRepository();
