@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Static factory pattern / Singleton
 export class Database {
   static _instance = new Database();
 
