@@ -1,11 +1,11 @@
-import { UserType } from "../../models/User";
+import { User } from "../../domain/User";
 import UserRepository from "../../repositories/UserRepository";
 
 class CreateUser {
-  async execute(user: UserType) {
+  async execute(user: User) {
     const User = {
-      name: user.name,
-      email: user.email
+      name: user.getUserName,
+      email: user.getUserEmail
     };
 
     try {
