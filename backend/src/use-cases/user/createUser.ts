@@ -2,10 +2,11 @@ import { User } from "../../domain/User";
 import UserRepository from "../../repositories/UserRepository";
 
 class CreateUser {
-  async execute(user: User) {
+  async execute(user: User & { password: string }) {
     const User = {
       name: user.getUserName,
-      email: user.getUserEmail
+      email: user.getUserEmail,
+      password: user.password
     };
 
     try {

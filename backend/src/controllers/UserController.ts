@@ -6,10 +6,11 @@ class UserController {
   createNewUser: RequestHandler = async (req, res) => {
     const newUser = {
       name: req.body.name,
-      email: req.body.email
+      email: req.body.email,
+      password: req.body.password
     };
 
-    const newUserData = await createUser.execute(new User(newUser.name, newUser.email));
+    const newUserData = await createUser.execute(Object.assign(new User(newUser.name, newUser.email), { password: newUser.password }));
 
     res.json(newUserData);
   }

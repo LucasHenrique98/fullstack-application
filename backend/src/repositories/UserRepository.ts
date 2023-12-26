@@ -11,6 +11,7 @@ class UserRepository implements IUserRepository {
     return UserSchema.create({
       name: user.name,
       email: user.email,
+      password: user.password
     })
   }
 }
