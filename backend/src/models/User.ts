@@ -1,12 +1,20 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 const { Schema } = mongoose;
 
-export type UserType = {
-  name: string;
-  email: string;
-};
+export interface IUser extends mongoose.Document {
+  name: String,
+  email: String,
+  password: {
+    type: String,
+    required: true,
+    minLength: [8, 'Password must be at least 8 characters long'],
+    maxLength: [128, 'Password must be less than 128 character long']
+  },
+  comparePassword(candidatePassword: string): Promise<boolean>,
+  generateAuthToken(): string
+}
 
 const userSchema = new Schema({
   name: String,
@@ -37,15 +45,15 @@ userSchema.methods.generateAuthToken = function () {
   return token;
 }
 
-userSchema.statics.findByToken = async function(token: string) {
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_TOKEN as string);
-    return await this.findOne({ _id: decoded._id });
-  } catch(err: any) {
-    throw new Error(`Error verifying token: ${err.message}`);
-  }
-}
+// userSchema.statics.findByToken = async function(token: string) {
+//   try {
+//     const decoded = jwt.verify(token, process.env.JWT_TOKEN as string);
+//     return await this.findOne({ _id: decoded._id });
+//   } catch(err: any) {
+//     throw new Error(`Error verifying token: ${err.message}`);
+//   }
+// }
 
-const User = mongoose.model('user', userSchema);
+const User = mongoose.model<IUser>('user', userSchema);
 
 export { User };
