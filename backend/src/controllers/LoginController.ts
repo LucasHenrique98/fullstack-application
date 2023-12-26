@@ -12,7 +12,6 @@ class LoginController {
       
       const token = await Login.execute(inputData);
       
-      console.log(token)
       if (token) {
         res.cookie('token', token, { httpOnly: true, sameSite: 'strict', secure: false })
       }
