@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { Database } from './database';
 import userRoutes from './routes/user';
+import loginRoutes from './routes/login';
 dotenv.config();
 
 const app = express();
@@ -10,6 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(userRoutes);
+app.use(loginRoutes);
 
 const database = Database.instance();
 database.connect();
